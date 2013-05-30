@@ -175,3 +175,4 @@ class Client:
         if page is not None:
             params['page'] = page
         return self._query(PAIR + '/money/wallet/history')
+        
