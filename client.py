@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Copyright © 2013 albertyfwu <albertyfwu@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person
@@ -23,6 +25,7 @@
 
 import hmac, base64, hashlib, urllib, requests
 import time
+import json
 
 BASE = 'https://data.mtgox.com/api/2/'
 PAIR = 'BTCUSD'
@@ -72,10 +75,10 @@ class Client:
         Checks to see that returned JSON from
         _request is valid.
         """
-        response = self._request(path, params):
+        response = self._request(path, params)
         if 'result' in response and response['result'] == 'success':
             return response['data']
-        else
+        else:
             raise ClientException('Request failed')
 
     """
@@ -109,10 +112,10 @@ class Client:
         return self._query(PAIR + '/money/order/quote', params)
 
     def quote_bid(self, amount):
-        return order_quote('bid', amount)
+        return self.quote('bid', amount)
 
     def quote_ask(self, amount):
-        return order_quote('ask', amount)
+        return self.quote('ask', amount)
 
     def order_add(self, type, amount_int, price_int=None):
         params = { 'type': type, 'amount_int': amount_int }
@@ -175,4 +178,3 @@ class Client:
         if page is not None:
             params['page'] = page
         return self._query(PAIR + '/money/wallet/history')
-        

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Copyright © 2013 albertyfwu <albertyfwu@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person
@@ -30,5 +32,5 @@ MTGOX_KEY = api['MTGOX_KEY']
 MTGOX_SECRET = api['MTGOX_SECRET']
 
 client = Client(MTGOX_KEY, MTGOX_SECRET)
-result = client.order()
+result = client.quote_bid(1e8)
 print result
