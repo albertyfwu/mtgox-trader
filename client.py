@@ -4,8 +4,19 @@ import time
 BASE = 'https://data.mtgox.com/api/2/'
 PAIR = 'BTCUSD'
 
+class ClientException(Exception):
+
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
 
 class Client:
+    """
+    Client for handling connections with
+    MtGox server via MtGox trading API
+    """
 
     def __init__(self, key, secret):
         self.key = key
@@ -28,10 +39,17 @@ class Client:
         }
 
         try:
-            request = requests.post(BASE + path, data=params, headers=headers)
-            return request.text
+            response = requests.post(BASE + path, data=params, headers=headers)
+            return json.loads(response.text)
         except Exception as e:
             print '_request error: %s' % e
+
+    def _query(self, path, params={}):
+        response = self._request(path, params):
+        if 'result' in response and response['result'] == 'success':
+            return response['data']
+        else
+            raise ClientException('Request failed')
 
     """
     General information

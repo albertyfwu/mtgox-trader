@@ -7,4 +7,5 @@ MTGOX_KEY = api['MTGOX_KEY']
 MTGOX_SECRET = api['MTGOX_SECRET']
 
 client = Client(MTGOX_KEY, MTGOX_SECRET)
-print client.ticker()
+client_info = client.info()
+print type(client_info)
