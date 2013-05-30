@@ -1,0 +1,4 @@
+*.py[cod]
+
+# API Key and Secret
+api_info.json
