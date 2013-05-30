@@ -104,14 +104,14 @@ class Client:
     Orders
     """
 
-    def order_quote(self, type, amount):
+    def quote(self, type, amount):
         params = { 'type': type, 'amount': amount }
         return self._query(PAIR + '/money/order/quote', params)
 
-    def order_quote_bid(self, amount):
+    def quote_bid(self, amount):
         return order_quote('bid', amount)
 
-    def order_quote_ask(self, amount):
+    def quote_ask(self, amount):
         return order_quote('ask', amount)
 
     def order_add(self, type, amount_int, price_int=None):
@@ -121,10 +121,10 @@ class Client:
         return self._query(PAIR + '/money/order/add', params)
 
     def bid(self, amount_int, price_int=None):
-        return order('bid', amount_int, price_int)
+        return order_add('bid', amount_int, price_int)
 
     def ask(self, amount_int, price_int=None):
-        return order('ask', amount_int, price_int)
+        return order_add('ask', amount_int, price_int)
 
     def order_cancel(self, oid):
         params = { 'oid': oid }
